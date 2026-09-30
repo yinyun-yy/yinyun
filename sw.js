@@ -1,4 +1,4 @@
-const CACHE = 'naifen-v2';
+const CACHE = 'naifen-v3';
 const ASSETS = [
   './',
   './index.html',

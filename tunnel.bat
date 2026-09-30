@@ -1,6 +1,6 @@
 @echo off
 chcp 65001 >nul
-title 奶蛙大冒险 - 公网共享
+title 干干历险记 - 公网共享
 set PORT=8000
 
 netstat -ano | findstr ":%PORT% " | findstr LISTENING >nul
