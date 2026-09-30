@@ -35,7 +35,7 @@ export const CONFIG = {
     knockback: 420,
   },
   eat: {
-    threshold: 1.0,
+    threshold: 0,
   },
   zoom: {
     base: 1.08,

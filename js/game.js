@@ -1,4 +1,4 @@
-import { CONFIG, PONDS, TARGET_TYPES, radiusFor, expToNext, stageFor, maxTierFor } from './config.js';
+import { CONFIG, PONDS, TARGET_TYPES, radiusFor, expToNext, stageFor } from './config.js';
 import { TAU, clamp, rand, randInt, angleTo } from './utils.js';
 import { World } from './world.js';
 import { Player } from './player.js';
@@ -47,7 +47,7 @@ export class Game {
     for (let i = 0; i < CONFIG.game.initialScatter; i++) {
       const x = rand(m, W);
       const y = rand(m, H);
-      const type = this.pickTypeFor(x, y, 3);
+      const type = this.pickTypeFor(x, y, 5);
       if (!type) continue;
       const t = this.firstInactive();
       if (!t) break;
@@ -269,7 +269,7 @@ export class Game {
           x = clamp(this.player.x + Math.cos(a) * d, m, W);
           y = clamp(this.player.y + Math.sin(a) * d, m, H);
         }
-        const type = this.pickTypeFor(x, y, maxTierFor(this.player.level));
+        const type = this.pickTypeFor(x, y, 5);
         if (!type) continue;
         const t = this.firstInactive();
         if (!t) return;
