@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<div id="app">
 <canvas id="game"></canvas>
 
 <div id="hud" class="hidden">
@@ -55,7 +56,7 @@
       <button class="btn btn-ghost" id="btn-help">游戏说明</button>
       <button class="btn btn-ghost" id="btn-settings">设置</button>
     </div>
-    <p class="menu-hint" id="menu-hint">WASD / 方向键移动 · SHIFT 加速 · 手机横屏体验更佳</p>
+    <p class="menu-hint" id="menu-hint">WASD / 方向键移动 · SHIFT 加速 · 手机自动横屏</p>
   </div>
 </div>
 
@@ -123,12 +124,6 @@
   </div>
 </div>
 
-<div id="rotate" class="overlay hidden">
-  <div class="phone-anim"><div class="phone-ico"></div></div>
-  <p class="rotate-text">请将手机横屏游玩</p>
-  <p class="rotate-sub">旋转手机，获得最佳体验</p>
-</div>
-
 <div id="joy-zone" class="hidden">
   <div id="joy-base"></div>
   <div id="joy-knob"></div>
@@ -136,6 +131,7 @@
 <button id="btn-boost" class="hidden" aria-label="加速">⚡</button>
 
 <div id="bootinfo"></div>
+</div>
 <script type="module" src="js/main.js"></script>
 </body>
 </html>

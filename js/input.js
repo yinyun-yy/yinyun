@@ -78,6 +78,12 @@ export class Input {
       if (e.pointerId !== this.joy.id) return;
       let dx = e.clientX - this.joy.baseCX;
       let dy = e.clientY - this.joy.baseCY;
+      const appEl = document.getElementById('app');
+      if (appEl && appEl.classList.contains('rotated')) {
+        const t = dx;
+        dx = dy;
+        dy = -t;
+      }
       const d = Math.hypot(dx, dy);
       if (d > this.joy.maxR) {
         dx = (dx / d) * this.joy.maxR;

@@ -15,17 +15,39 @@ const ui = new UI(game);
 game.bindIO(input, audio, ui);
 
 input.onPause = () => ui.onPauseRequest();
-input.onFirstGesture = () => audio.init();
+input.onFirstGesture = () => {
+  audio.init();
+  tryLockLandscape();
+};
 
 function resize() {
-  view.w = window.innerWidth;
-  view.h = window.innerHeight;
+  const portrait = window.innerHeight > window.innerWidth;
+  const rotated = input.isTouch && portrait;
+  const appEl = document.getElementById('app');
+  if (appEl) appEl.classList.toggle('rotated', rotated);
+  if (rotated) {
+    view.w = window.innerHeight;
+    view.h = window.innerWidth;
+  } else {
+    view.w = window.innerWidth;
+    view.h = window.innerHeight;
+  }
   view.dpr = Math.min(window.devicePixelRatio || 1, 2);
   canvas.width = Math.round(view.w * view.dpr);
   canvas.height = Math.round(view.h * view.dpr);
   canvas.style.width = view.w + 'px';
   canvas.style.height = view.h + 'px';
   ui.onResize();
+}
+
+function tryLockLandscape() {
+  try {
+    if (screen.orientation && screen.orientation.lock) {
+      screen.orientation.lock('landscape').catch(function () {});
+    }
+  } catch (e) {
+    /* unsupported */
+  }
 }
 
 window.addEventListener('resize', resize);
@@ -39,7 +61,6 @@ function loop(now) {
   if (!document.hidden) {
     game.update(dt, view);
     game.render(ctx, view, view.dpr);
-    ui.updateRotate();
   }
   requestAnimationFrame(loop);
 }
@@ -158,16 +179,19 @@ if (new URLSearchParams(location.search).has('test')) {
   }, 4200);
   setTimeout(() => {
     game.input.isTouch = true;
-    ui.onResize();
+    window.dispatchEvent(new Event('resize'));
     const info = document.getElementById('bootinfo');
     if (info) {
+      const app = document.getElementById('app');
       info.textContent =
         'MOBILE joyShown=' +
         !document.getElementById('joy-zone').classList.contains('hidden') +
         ' boostShown=' +
         !document.getElementById('btn-boost').classList.contains('hidden') +
-        ' rotateShown=' +
-        !document.getElementById('rotate').classList.contains('hidden') +
+        ' rotated=' +
+        app.classList.contains('rotated') +
+        ' viewW=' +
+        window.innerWidth +
         ' ok';
     }
   }, 4600);

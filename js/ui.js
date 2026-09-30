@@ -203,16 +203,6 @@ export class UI {
       c.timer = timerText;
       this.el('hud-timer').textContent = timerText;
     }
-    this.updateRotate();
-  }
-
-  updateRotate() {
-    const portrait = window.innerHeight > window.innerWidth;
-    const show =
-      this.isTouch &&
-      portrait &&
-      (this.game.state === 'playing' || this.game.state === 'paused');
-    this.el('rotate').classList.toggle('hidden', !show);
   }
 
   onResize() {
@@ -221,9 +211,8 @@ export class UI {
     this.el('btn-boost').classList.toggle('hidden', !this.isTouch);
     this.el('hud-hint-pc').classList.toggle('hidden', this.isTouch);
     this.el('menu-hint').textContent = this.isTouch
-      ? '左下摇杆移动 · 右下按钮加速 · 横屏体验更佳'
+      ? '左下摇杆移动 · 右下按钮加速 · 自动横屏适配'
       : 'WASD / 方向键移动 · SHIFT 加速 · 按住鼠标跟随';
-    this.updateRotate();
   }
 
   refreshMenuBest() {
