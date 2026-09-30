@@ -2,3 +2,5 @@ screenshots/
 *.log
 node_modules/
 .DS_Store
+tunnel-log.txt
+scripts/run-tunnel.bat
