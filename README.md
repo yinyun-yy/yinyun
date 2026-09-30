@@ -36,21 +36,29 @@ node server.js
 
 ## 部署到公网
 
-### Cloudflare Pages
+### 方式一：临时分享（电脑要开着，双击即用）
 
-1. 把项目推送到 GitHub 仓库
+双击 `tunnel.bat`（需 Windows 自带 ssh + python），窗口里会出现一个
+`https://xxxx.lhr.life` 网址，直接发给朋友即可在手机上玩。
+关闭窗口或关机后网址失效。
+
+### 方式二：永久部署（电脑关机也能玩，免费）
+
+**Cloudflare Pages（推荐）**
+
+1. 用 GitHub Desktop 把本项目发布到 GitHub：
+   打开 GitHub Desktop → Add local repository → 选择本项目文件夹 →
+   Publish repository → 名字填 `yinyun` → 勾选 Public（公开）
 2. 打开 https://dash.cloudflare.com → Workers & Pages → Create → Pages
-3. Connect to Git，选择仓库
-4. Build command 留空，Output directory 填 `/`（根目录）
-5. 部署完成即可获得 `https://xxxx.pages.dev` 网址
+3. Connect to Git 选择刚创建的 yinyun 仓库
+4. Build command 留空，Output directory 填 `/`，点 Deploy
+5. 完成即可获得 `https://yinyun-xxx.pages.dev` 网址，永久有效
 
-### GitHub Pages
+**GitHub Pages（备选）**
 
-Settings → Pages → Source 选择 `main` 分支根目录即可。
-
-### Vercel
-
-`vercel deploy`（无构建配置，纯静态）。
+1. 同上发布仓库到 GitHub（名字 `yinyun`，公开）
+2. 仓库页面 → Settings → Pages → Source 选 `main` 分支根目录 → Save
+3. 获得网址 `https://你的用户名.github.io/yinyun/`
 
 ## PWA
 
